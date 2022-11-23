@@ -11,7 +11,7 @@ const Pagination = ({postsPerPage, totalPosts, paginate}) =>{
     }
 
     return(
-            <div>
+            <ContenedorPagination>
                 {pageNumbers.map(number => (
                     <div key={number} >
                         <a onClick={() => paginate(number)} href >
@@ -19,15 +19,15 @@ const Pagination = ({postsPerPage, totalPosts, paginate}) =>{
                         </a>
                     </div>
                 ))}
-            </div>
+            </ContenedorPagination>
     )
 }
 export default Pagination;
 
 
-const ContenidoModal = styled.div`
+const ContenedorPagination = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction:column;
+    flex-direction:row;
 `;

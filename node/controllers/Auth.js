@@ -1,5 +1,5 @@
 // creacion de controlador Login() inicio de sesion | Me()  obtiene sesion iniciada | LogOut() cierra sesion
-import User from "../model/UserModel.js";
+import User from "../models/UserModel.js";
 import argon2 from "argon2";
 
 export const Login = async(req, res) => {
