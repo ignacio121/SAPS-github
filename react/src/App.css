@@ -1,0 +1,177 @@
+.btn{
+  display:flexboxs;
+  align-items: center;
+  flex-direction:row;
+  height: 30vh;
+  width: 20vw;
+  margin: 5px 5px;
+  background-color: rgb(26, 77, 171);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  color:rgba(227, 217, 217, 0.774);
+  text-transform: uppercase;
+  letter-spacing:normal;
+  cursor:pointer}
+
+
+.pumba{
+  background-Color: #8699a8;
+  color:white;
+  padding:10px;
+  margin: 5px 0;
+  
+  cursor:pointer;
+  
+}
+
+.ButtonContainer {
+  background-Color: rgb(66, 116, 209);
+  margin: 1rem 0 2rem 0 ;
+  height: 10vh;
+  width: 10vw;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-group{
+  position: relative;
+
+}
+.input{
+  width: 850px;
+  padding: 25px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(100,100,111, 0.2) 0px 7px 29px 0px;
+  margin: 15px 120px;
+  color: #1766DC;
+  background-color: transparent;
+  outline: 2px solid #fff;
+  font-size: 20px;
+}
+.inputP{
+  width: 850px;
+  padding: 25px;
+  height: 200px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(100,100,111, 0.2) 0px 7px 29px 0px;
+  margin: 15px 120px;
+  color: #1766DC;
+  background-color: transparent;
+  outline: 2px solid #fff;
+  top: 8px;
+}
+
+.input-label{
+  position: absolute;
+  color: #1766DC;
+  padding: 13px;
+  margin:15px 120px;
+  left: 0;
+  transform: translate(10px, 10px);
+  transition: transform .25s;
+  font-size: 20px;
+}
+
+.input:focus+.input-label,
+.input:valid+.input-label{
+  transform:
+  translate(10px, -40px) scale(.8);
+  color: #1766DC;
+  padding-inline: 5px;
+  
+}
+.input:is(:focus, :valid){
+  outline-color: #d1c5fc;
+  
+}
+
+.inputP:focus+.input-label,
+.inputP:valid+.input-label{
+  transform:
+  translate(10px, -40px) scale(.8);
+  color: #1766DC;
+  padding-inline: 5px;
+
+  
+}
+.inputP:is(:focus, :valid){
+  outline-color: #d1c5fc;
+}
+
+.ButtonSend{
+  background-color: #fff;
+  color: #1766DC;
+  height: 50px;
+  width: 100px;
+  border-radius: 10px;
+  cursor:pointer;
+  bottom: 0;
+  margin: 0 auto;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  border-color: rgb(26, 77, 171);
+}
+.ButtonSend:hover{
+  background-color: rgb(26, 77, 171);
+}
+
+.PreguntaFrecuente{
+  width: 100px;
+  height: 100px;
+  outline-color: #d1c5fc;
+}
+
+.complete{
+  width: 100%;
+  height: 100%;
+  background-color: #d1c5fc;
+  position: absolute;
+  display: flex;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@700&display=swap');
+
+*{
+    margin:0;
+    padding: 0;
+    font-family: 'Dosis', sans-serif;
+}
+body{
+    font-family: 'Raleway', sans-serif;
+    background-image: url('../src/images/img0.jpg');
+    background-size: cover;
+    display:flex;
+
+    
+}
+
+.top{
+  display: flex;
+  height: 90vh;
+  width: 100vw;
+}
+.center{
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  width: 100vw;  
+  
+}
+
+.containerOptions{
+  display:flex;
+  background-color: aqua;
+  height: 100%;
+  width: 100%;
+ 
+}
+
+
