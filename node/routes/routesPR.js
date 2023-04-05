@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', getAllPR)
 router.get('/:id',getPR)
 router.post('/', createPR)
-router.put(':id',updatePR)
+router.put('/:id',updatePR)
 router.delete('/:id',deletePR)
 
 export default router

@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Modal from '../components/Modal.jsx';
 import '../App.css';
 import axios from 'axios';
 import Navbar from '../components/NavBar.jsx';
@@ -8,15 +7,21 @@ import styled from 'styled-components';
 import ButtonPro from '../components/ButtonPro.jsx';
 import Post from '../components/PostPF.jsx';
 import Pagination from '../components/pagination.jsx';
+import PregSol from '../components/PregSol';
 
-const URIPF = 'http://localhost:5000/pregunta_frecuente/'
+
+const URIPF = 'http://localhost:5000/preguntas_frecuentes/'
+
 
 const Director = () =>{
-    const [option,changeOption] = useState(0);
+    const [option,changeOption] = useState(1);
+    const [trash,changeTrash] = useState(false);
+    const [edit,changeEdit] = useState(false);
 
     const [preguntaF, setPreguntaF] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(10);
+
 
     useEffect( () => {getAllPreguntas_Frecuentes()}, [])
   
@@ -30,19 +35,25 @@ const Director = () =>{
     const currentPosts = preguntaF.slice(indexOfFirstPost, indexOfLastPost);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
-
+    
     return(
         <div className='complete'>
         {<Navbar></Navbar>}
         <Sidebar changeOption={changeOption}></Sidebar>
 
         {option === 1 &&(
-            <ContenedorOptions> coming soon...</ContenedorOptions>
+            <ContenedorOptions>
+                <div>Preguntas</div> 
+                <PregSol URIR={'http://localhost:5000/pregunta_realizada/'} URI={'http://localhost:5000/pregunta/'} URIC={'http://localhost:5000/categoriaP/'}></PregSol>
+                <div>Solicitudes</div> 
+                <PregSol URIR={'http://localhost:5000/solicitud_realizada/'} URI={'http://localhost:5000/solicitud/'} URIC={'http://localhost:5000/categoriaS/'}></PregSol>
+                
+            </ContenedorOptions>
         )}
         {option === 2 &&(
             <ContenedorOptions>
-                <ButtonPro/>
-                <Post posts={currentPosts}/>
+                <ButtonPro edit={edit} changeEdit={changeEdit} trash={trash} changeTrash ={changeTrash}/>
+                <Post posts={currentPosts} editar={edit} eliminar={trash} URI={URIPF}/>
                 <Pagination postsPerPage={postsPerPage} totalPosts={preguntaF.length} paginate={paginate}/>
             </ContenedorOptions>
         )}
@@ -54,7 +65,8 @@ const Director = () =>{
         {option === 4 &&(
             <ContenedorOptions> coming soon...</ContenedorOptions>
         )}
-
+        
+    
         </div>
 
     );
@@ -70,8 +82,8 @@ export const ContenedorOptions = styled.div`
     right: 0;
     height: 93vh;
     width:84vw; 
-    background-color: #d1c5fc;
+    background-color: #fff;
     justify-content: center;
     align-items: center;
-    flex-direction:column;
+    flex-direction: column;
 `;

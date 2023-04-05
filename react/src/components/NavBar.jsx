@@ -1,21 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import { FaCross } from "react-icons/fa";
-import {NavLink, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { IconContext } from "react-icons";
-import { useSelector, useDispatch } from "react-redux";
-import { LogOut, reset } from "../features/authSlice.js";
-
+import {useDispatch, useSelector } from "react-redux";
+import { getMe, LogOut, reset } from "../features/authSlice.js";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
- // const {user} = useSelector((state)=> state.auth);
   const logout = () =>{
     dispatch(LogOut());
     dispatch(reset());
     navigate("/")
   }
+
+  const {user} = useSelector((state)=> state.auth);
+  useEffect(()=>{
+    dispatch(getMe());
+  },[dispatch]);
+  
   return(
       <Container>
             <Wrapper>
@@ -27,20 +32,17 @@ const Navbar = () => {
                     <p> SAPS</p>
 
                 </LogoContainer>
-                
+                {user&&user.role ===5&&
                 <Menu>
+
                     <MenuItem>
-                        <MenuItemLink>
-                            DATOS PERSONALES
-                        </MenuItemLink>
-                    </MenuItem>
-                    <MenuItem>
-                        <MenuItemLink>
+                        <MenuItemLink onClick={logout}>
                           CERRAR SESION  
                         </MenuItemLink>
                     </MenuItem>
+                    
                   </Menu>
-                  
+                }
                   
                   
                 </IconContext.Provider>

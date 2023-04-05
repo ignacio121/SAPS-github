@@ -6,6 +6,7 @@ import SequelizeStore from "connect-session-sequelize";
 import UserRoute from "./routes/UserRoute.js";
 import AuthRoute from "./routes/AuthRoute.js"
 import db from "./database/db.js"
+import routesCategoriaPF from './routes/routesCategoriaPF.js'
 import routesCategoriaP from './routes/routesCategoriaP.js'
 import routesCategoriaS from './routes/routesCategoriaS.js'
 import routesEstado from './routes/routesEstado.js'
@@ -56,6 +57,7 @@ app.use(express.json())
 
 app.use(UserRoute);
 app.use(AuthRoute);
+app.use('/categoriaPF',routesCategoriaPF);
 app.use('/categoriaP',routesCategoriaP);
 app.use('/categoriaS',routesCategoriaS);
 app.use('/estado',routesEstado);

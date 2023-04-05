@@ -36,7 +36,7 @@ const Overlay = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(0,0,0,.6);
+    background: rgba(0,0,0,.3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,7 +54,6 @@ const ContenedorModal = styled.div`
     align-items: center;
     justify-content: center;
     z-index:4;
-
 `;
 
 const EncabezadoModal = styled.div`
