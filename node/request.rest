@@ -1,12 +1,13 @@
 //crear usuario
 POST http://localhost:5000/users
 Content-Type: application/json
+
 {
-    "id": "20700200",
-    "name": "Estudiante",
-    "email": "estudiante@ucm.cl",
-    "password": "estudiantepassword",
-    "confPassword": "estudiantepassword",
+    "id": "20565639",
+    "name": "Cristofer Mondaca",
+    "email": "cristofer.mondaca@alu.ucm.cl",
+    "password": "a123",
+    "confPassword": "a123",
     "role": "5",
     "telefono": "1015"
 }
@@ -61,4 +62,15 @@ DELETE http://localhost:5000/logout
 GET http://localhost:5000/preguntas_frecuentes
 
 ###
-GET http://localhost:5000/pregunta
+PUT http://localhost:5000/pregunta/12
+{
+  "ID_Pregunta": 12,
+  "Prioridad": "Baja",
+  "Contenido": "Quería saber donde puedo hacer la renovación de mi credencial, debido a que en estos días, se me ha perdido la billetera.",
+  "Categoria": "Renovacion de Credencial",
+  "Estado": "Sin respuesta",
+}
+
+###
+get http://localhost:5000/pregunta/12
+

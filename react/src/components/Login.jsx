@@ -7,8 +7,9 @@ import { useNavigate } from "react-router-dom";
 // navegar entre rutas
 import { LoginUser, reset } from "../features/authSlice";
 // funciones importadas de authSlice
-import '../App.css';
+import styled from "styled-components";
 
+import logo from '../images/Logo.png'
 
 
 const Login = () => {
@@ -20,12 +21,13 @@ const Login = () => {
     (state) => state.auth
   );
 
+  
   useEffect(() => {
     if (user && isSuccess && user.role === 5) {
       navigate("/estudiante");
     }
     if (user && isSuccess && user.role === 2) {
-      navigate("/jefecarrera");
+      navigate("/director");
     }
     dispatch(reset());
   }, [user, isSuccess, dispatch, navigate]);
@@ -36,54 +38,129 @@ const Login = () => {
     dispatch(LoginUser({ id, password }));
   };
 
+
   return (
-    <section className="hero is-fullheight is-fullwidth ">
-      <div className="hero-body">
-        <div className="container">
-          <div className="columns is-centered">
-            <div className="column is-4">
-              <form onSubmit={Auth} className="box">
-                {isError && <p className="has-text-centered">{message}</p>}
-                <h1 className="title is-2">Inicio de Sesion</h1>
-                <div className="field">
-                  <label className="label">Rut</label>
-                  <div className="control"> 
-                    <input
-                      type="text"
-                      className="input"
-                      value={id}
-                      onChange={(e) => setId(e.target.value)}
-                      placeholder="Rut"
-                    />
-                  </div>
-                </div>
-                <div className="field">
-                  <label className="label">Contraseña</label>
-                  <div className="control">
-                    <input
-                      type="password"
-                      className="input"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="******"
-                    />
-                  </div>
-                </div>
-                <div className="field mt-5">
-                  <button
-                    type="submit"
-                    className="button is-success is-fullwidth"
-                  >
-                    {isLoading ? "Loading..." : "Login"}
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <Contenedor>
+      <img src={logo}/>
+      {isError && 
+        <p>{message}</p>}
+      <ContenedorForm>
+        <LoginText>Inicio de Sesion</LoginText>
+        <Form onSubmit={Auth} >
+          <InputContainer>
+            <Input type="text" value={id} onChange={(e) => setId(e.target.value)} placeholder="Rut"/>
+            <br/>
+            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="******"/>
+          </InputContainer>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <ButtonContainer>
+            <Button type="submit">
+              {isLoading ? "Loading..." : "Login"}
+            </Button>
+          </ButtonContainer>
+        </Form>
+      </ContenedorForm>
+    </Contenedor>
   );
 };
 
 export default Login;
+
+
+export const Contenedor = styled.div`
+  display:flex;
+  width: 100vw;
+  height: 100vh;
+  margin:0;
+  padding: 0;
+  align-items:center;
+  justify-content: center;
+  flex-direction:column;
+`;
+
+export const ContenedorForm = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 55vh;
+  width: 30vw;
+  background: #ffffff;  
+  box-shadow: 0 0 0 0.1rem ;
+  backdrop-filter: blur(8.5);
+  border-radius: 20px;
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+`;
+const LoginText = styled.h2`
+  margin: 3rem 0 2rem 0;
+  color: #051E64;
+  font-size: 35px;
+`;
+
+const Form = styled.form`
+  display: flex;
+  margin-top: 100px;
+  flex-direction: column;
+`;
+
+const InputContainer =  styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+  height: 20%;
+  width: 400px;   
+`;
+
+const Input = styled.input`
+    background : rgba(255,255,255,0.15);
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+    border-radius: 2rem;
+    width: 80%;
+    height: 3rem;
+    padding: 1rem;
+    border: none;
+    outline: none;
+    color: #03217b;
+    font-size: 1.2rem;
+    font-weight: bold;
+    &:focus{
+        display: inline-block;
+        box-shadow: 0 0 0 0.1rem #03217b73;
+        backdrop-filter: blur(12);
+    }
+    &::placeholder{
+        color: #03217b;
+        font-weight: 100;
+        font-size: 1.2rem;
+
+    }
+`;
+
+const ButtonContainer = styled.div`
+  margin: 1rem 0 2rem 0 ;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const Button = styled.button`
+    background: linear-gradient(to right, #14163c 0%, #03217b 79%);   
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    width: 150px;
+    height: 3rem;
+    border: none;
+    color: white;
+    border-radius: rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    %:hover{
+      background-color: #fff;   
+    }
+`;
+

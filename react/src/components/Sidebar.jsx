@@ -1,38 +1,23 @@
 import React ,{useState, useEffect}  from 'react'
 import styled from "styled-components";
-import axios from 'axios';
 import { HiMail } from "react-icons/hi";
 import { TfiServer} from "react-icons/tfi";
 import { VscGraphLine } from "react-icons/vsc";
 import { BiLogOut } from "react-icons/bi";
 import { IconContext } from "react-icons";
-import Post from '../components/PostPF.jsx'
-import Pagination from '../components/pagination';
-import ButtonPro from './ButtonPro.jsx';
+import { useDispatch } from "react-redux";
+import { LogOut, reset } from "../features/authSlice.js";
+import {useNavigate} from "react-router-dom";
 
-const URIPF = 'http://localhost:8000/preguntas_frecuentes/'
-
-const Sidebar = () => {
-
-    const [option,changeOption] = useState(0);
-    const [preguntaF, setPreguntaF] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(5);
-
-    useEffect( () => {getAllPreguntas_Frecuentes()}, [])
-  
-    const getAllPreguntas_Frecuentes = async ()=> {
-        const res = await axios.get(URIPF)
-        setPreguntaF(res.data)
+const Sidebar = ({changeOption}) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+   // const {user} = useSelector((state)=> state.auth);
+    const logout = () =>{
+      dispatch(LogOut());
+      dispatch(reset());
+      navigate("/")
     }
-
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = preguntaF.slice(indexOfFirstPost, indexOfLastPost);
-
-    const paginate = pageNumber => setCurrentPage(pageNumber);
-
-
     return(
         <>
         <Container>
@@ -55,17 +40,10 @@ const Sidebar = () => {
                             </div>
                         </MenuItemLink>
                     </MenuItem> 
+
                     <MenuItem>
                         <MenuItemLink>
-                            <div onClick={()=>changeOption(3)}>
-                                <VscGraphLine/>
-                                Estadisticas  
-                            </div>
-                        </MenuItemLink>
-                    </MenuItem>
-                    <MenuItem>
-                        <MenuItemLink>
-                            <div onClick={()=>changeOption(4)}>
+                            <div onClick={()=>logout()}>
                                 <BiLogOut/>
                                 Cerrar sesion 
                             </div>
@@ -75,23 +53,6 @@ const Sidebar = () => {
                 </IconContext.Provider>
             </Wrapper>
         </Container>
-        {option === 1 &&(
-            <ContenedorOptions> wena</ContenedorOptions>
-        )}
-        {option === 2 &&(
-            <ContenedorOptions>
-                <ButtonPro/>
-                <Post posts={currentPosts}/>
-                <Pagination postsPerPage={postsPerPage} totalPosts={preguntaF.length} paginate={paginate}/>
-            </ContenedorOptions>
-        )}
-        {option === 3 &&(
-            <ContenedorOptions> holaaa</ContenedorOptions>
-        )}
-        {option === 4 &&(
-            <ContenedorOptions> holaaaaa</ContenedorOptions>
-        )}
-
         </>
     )
 }
@@ -152,7 +113,7 @@ export const MenuItemLink = styled.a`
   width: 100%;
   &:hover {
     color: #fff;
-    background-color: #e0792a;
+    background-color: rgb(19, 57, 128) ;
     transition: 0.5s all ease;
     div{
         svg{
@@ -163,13 +124,13 @@ export const MenuItemLink = styled.a`
     div{
         width: 100%;
         height: 100%;
-        display: flex
-        aling-items: center;
+        display: flex;
+        align-items: center;
         justify-content: center;
 
         svg{
             display: flex;
-            fill: #e07924;
+            fill: #fff;
             margin-right: 10px;
         }
     }

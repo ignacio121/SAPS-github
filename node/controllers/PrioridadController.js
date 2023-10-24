@@ -1,4 +1,4 @@
-import CategoriaPModel from "../models/PrioridadModel.js";
+import PrioridadModel from "../models/PrioridadModel.js";
 
 
 export const getAllPrioridad = async(req,res)=>{
